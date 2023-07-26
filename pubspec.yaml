@@ -1,6 +1,5 @@
 name: easy_maps_plus
 description: Draw routes and calculate distances easily with Google Maps in Flutter.
-publish_to: 'none'
 version: 0.1.0
 homepage: https://github.com/D3R50N/easy_maps_plus
 
@@ -12,6 +11,8 @@ dependencies:
     sdk: flutter
   google_maps_flutter: ^2.4.0
   http: ^1.1.0
+
+repository: https://github.com/D3R50N/easy_maps_plus
 
 dev_dependencies:
   flutter_test:
