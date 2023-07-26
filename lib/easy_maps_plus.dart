@@ -53,7 +53,7 @@ class EasyMapState extends State<EasyMap> {
         polylineCoordinates = _decodePolyline(encodedPolyline);
       });
     } catch (e) {
-      print('Oups: $e');
+      debugPrint('Oups: $e');
     }
   }
 
