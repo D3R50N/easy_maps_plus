@@ -2,6 +2,11 @@
 
 * Initial release.
 
-## 0.1.1
+# 0.1.1
 
 * Updated README.md and CHANGELOG.md to include the MIT License.
+
+# 0.1.2
+
+* Added example app.
+* Deleted main.dart.
