@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
           onMapCreated: (GoogleMapController controller) {
             // Map initialization callback
           },
+          destinationIcon: BitmapDescriptor.hueBlue, // default BitmapDescriptor.hueRed
           polylinesColor: Colors.blue,
           mapType: MapType.normal,
           showMarkers: true,
@@ -65,6 +66,8 @@ The EasyMap widget supports the following properties:
 - `coordinates` (required): A list of `LatLng` representing the waypoints for the driving directions. The first and last coordinates will be considered as the origin and destination, respectively.
 - `onMapCreated` (required): A callback function that will be called when the GoogleMapController is ready to be used.
 - `polylinesColor` (required): The color of the polylines that will be drawn on the map.
+- `destinationIcon`: The hue of the color of the destination marker.
+- `originIcon`: The hue of the color of the origin marker.
 - `initialCameraPosition`: The initial camera position for the map. If not provided, it will default to the first coordinate in the `coordinates` list with a zoom level of 15.
 - `mapType`: The type of map to display (e.g., normal, satellite, terrain, etc.). Defaults to `MapType.normal`.
 - `showMarkers`: A boolean indicating whether to display markers for the origin and destination points. Defaults to `true`.

@@ -10,3 +10,8 @@
 
 * Added example app.
 * Deleted main.dart.
+
+## 0.1.3
+
+* Added markers color customization
+* Added .env.dart in example

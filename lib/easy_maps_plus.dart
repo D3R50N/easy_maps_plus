@@ -12,15 +12,21 @@ class EasyMap extends StatefulWidget {
   final MapType mapType;
   final bool showMarkers;
 
-  const EasyMap(
-      {super.key,
-      required this.apiKey,
-      required this.coordinates,
-      required this.onMapCreated,
-      required this.polylinesColor,
-      this.mapType = MapType.normal,
-      this.showMarkers = true,
-      this.initialCameraPosition});
+  final double originIcon;
+  final double destinationIcon;
+
+  const EasyMap({
+    super.key,
+    required this.apiKey,
+    required this.coordinates,
+    required this.onMapCreated,
+    required this.polylinesColor,
+    this.mapType = MapType.normal,
+    this.showMarkers = true,
+    this.initialCameraPosition,
+    this.originIcon = BitmapDescriptor.hueGreen,
+    this.destinationIcon = BitmapDescriptor.hueRed,
+  });
 
   @override
   EasyMapState createState() => EasyMapState();
@@ -112,10 +118,13 @@ class EasyMapState extends State<EasyMap> {
               Marker(
                 markerId: const MarkerId('origine'),
                 position: widget.coordinates.first,
+                icon: BitmapDescriptor.defaultMarkerWithHue(widget.originIcon),
               ),
               Marker(
                 markerId: const MarkerId('destination'),
                 position: widget.coordinates.last,
+                icon: BitmapDescriptor.defaultMarkerWithHue(
+                    widget.destinationIcon),
               ),
             }
           : {},
