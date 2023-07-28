@@ -28,6 +28,7 @@ class MainApp extends StatelessWidget {
           destinationIcon: BitmapDescriptor.hueBlue,
           onMapCreated: (GoogleMapController controller) {},
           polylinesColor: Colors.red,
+		cameraTargetBoundes: LatLngBounds(),
         ),
       ),
     );
