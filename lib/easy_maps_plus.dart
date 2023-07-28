@@ -9,6 +9,7 @@ class EasyMap extends StatefulWidget {
   final Function(GoogleMapController) onMapCreated;
   final Color polylinesColor;
   final CameraPosition? initialCameraPosition;
+  final CameraTargetBounds? cameraTargetBounds;
   final MapType mapType;
   final bool showMarkers;
 
@@ -26,6 +27,7 @@ class EasyMap extends StatefulWidget {
     this.initialCameraPosition,
     this.originIcon = BitmapDescriptor.hueGreen,
     this.destinationIcon = BitmapDescriptor.hueRed,
+    this.cameraTargetBounds,
   });
 
   @override
@@ -130,6 +132,13 @@ class EasyMapState extends State<EasyMap> {
           : {},
       initialCameraPosition: widget.initialCameraPosition ??
           CameraPosition(target: widget.coordinates.first, zoom: 15),
+      cameraTargetBounds: widget.cameraTargetBounds ??
+          CameraTargetBounds(
+            LatLngBounds(
+              southwest: const LatLng(-34.3, -25.4),
+              northeast: const LatLng(37.2, 51.5),
+            ),
+          ),
     );
   }
 }
