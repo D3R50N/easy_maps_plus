@@ -3,7 +3,12 @@ import 'package:easy_maps_plus/easy_maps_plus.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:example/.env.dart';
 
-void main() {
+void main() async {
+  EasyMap.init(API_KEY);
+  var forward = await EasyMap.findPlaces('Paris');
+  print(forward);
+  var reverse = await EasyMap.findInfos(lat: '48.8566', long: '0.3522');
+  print(reverse);
   runApp(const MainApp());
 }
 
@@ -18,7 +23,6 @@ class MainApp extends StatelessWidget {
           title: const Text('Easy Maps Plus'),
         ),
         body: EasyMap(
-          apiKey: API_KEY,
           coordinates: const [
             LatLng(37.7749, -122.4194),
             LatLng(37.7749, -122.5194),
@@ -28,7 +32,7 @@ class MainApp extends StatelessWidget {
           destinationIcon: BitmapDescriptor.hueBlue,
           onMapCreated: (GoogleMapController controller) {},
           polylinesColor: Colors.red,
-		cameraTargetBoundes: LatLngBounds(),
+          cameraTargetBounds: const CameraTargetBounds(null),
         ),
       ),
     );

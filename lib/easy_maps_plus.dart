@@ -4,7 +4,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'utils.dart';
 
 class EasyMap extends StatefulWidget {
-  final String apiKey;
   final List<LatLng> coordinates;
   final Function(GoogleMapController) onMapCreated;
   final Color polylinesColor;
@@ -13,12 +12,20 @@ class EasyMap extends StatefulWidget {
   final MapType mapType;
   final bool showMarkers;
 
+  static late String _apiKey;
+
+  static void init(String apiKey) {
+    if (apiKey.trim().isEmpty) {
+      throw Exception('API Key is empty');
+    }
+    _apiKey = apiKey;
+  }
+
   final double originIcon;
   final double destinationIcon;
 
   const EasyMap({
     super.key,
-    required this.apiKey,
     required this.coordinates,
     required this.onMapCreated,
     required this.polylinesColor,
@@ -29,6 +36,18 @@ class EasyMap extends StatefulWidget {
     this.destinationIcon = BitmapDescriptor.hueRed,
     this.cameraTargetBounds,
   });
+
+  static Future<List<ForwardGeo>> findPlaces(String query) async {
+    return await ForwardGeo.fetchForwardGeo(apiKey: _apiKey, query: query);
+  }
+
+  static Future<ReverseGeo> findInfos({
+    required String lat,
+    required String long,
+  }) async {
+    return await ReverseGeo.fetchReverseGeo(
+        apiKey: _apiKey, lat: lat, long: long);
+  }
 
   @override
   EasyMapState createState() => EasyMapState();
@@ -49,7 +68,7 @@ class EasyMapState extends State<EasyMap> {
           .map((e) => '${e.longitude},${e.latitude}')
           .join(';');
       DrivingDirections directions =
-          await DrivingDirections.fetchDirections(widget.apiKey, coordinates);
+          await DrivingDirections.fetchDirections(EasyMap._apiKey, coordinates);
       setState(() {
         // Afficher les informations en debug
         debugPrint('Code: ${directions.code}');
@@ -134,6 +153,7 @@ class EasyMapState extends State<EasyMap> {
           CameraPosition(target: widget.coordinates.first, zoom: 15),
       cameraTargetBounds: widget.cameraTargetBounds ??
           CameraTargetBounds(
+            // Africa bounds
             LatLngBounds(
               southwest: const LatLng(-34.3, -25.4),
               northeast: const LatLng(37.2, 51.5),
