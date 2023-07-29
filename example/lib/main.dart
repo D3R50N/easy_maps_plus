@@ -6,9 +6,10 @@ import 'package:example/.env.dart';
 void main() async {
   EasyMap.init(API_KEY);
   var forward = await EasyMap.findPlaces('Paris');
-  print(forward);
+  print(forward[0].displayName); // the name of the first place that matches
   var reverse = await EasyMap.findInfos(lat: '48.8566', long: '0.3522');
-  print(reverse);
+  print(reverse.displayName); // the name of the place
+  print(reverse.address.city); // the city of the place
   runApp(const MainApp());
 }
 
