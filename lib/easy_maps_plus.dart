@@ -49,6 +49,13 @@ class EasyMap extends StatefulWidget {
         apiKey: _apiKey, lat: lat, long: long);
   }
 
+  static bool isInsideArea({
+    required LatLng point,
+    required Area area,
+  }) {
+    return area.hasInside(point);
+  }
+
   @override
   EasyMapState createState() => EasyMapState();
 }

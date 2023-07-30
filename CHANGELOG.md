@@ -19,3 +19,7 @@
 # 0.1.4
 
 * Added camera target bounds
+
+# 0.1.5
+
+* Added some static methods to EasyMap class

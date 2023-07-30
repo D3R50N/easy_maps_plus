@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DrivingDirections {
   String code;
@@ -301,5 +302,37 @@ class Address {
   @override
   String toString() {
     return 'Address{city: $city, state: $state, country: $country, countryCode: $countryCode}';
+  }
+}
+
+class Area {
+  LatLng c1;
+  LatLng c2;
+  LatLng c3;
+
+  Area({
+    required this.c1,
+    required this.c2,
+    required this.c3,
+  });
+
+  bool hasInside(LatLng point) {
+    double x = point.latitude;
+    double y = point.longitude;
+
+    double x1 = c1.latitude;
+    double y1 = c1.longitude;
+
+    double x2 = c2.latitude;
+    double y2 = c2.longitude;
+
+    double x3 = c3.latitude;
+    double y3 = c3.longitude;
+
+    double d1 = (x - x1) * (y2 - y1) - (y - y1) * (x2 - x1);
+    double d2 = (x - x2) * (y3 - y2) - (y - y2) * (x3 - x2);
+    double d3 = (x - x3) * (y1 - y3) - (y - y3) * (x1 - x3);
+
+    return (d1 < 0 && d2 < 0 && d3 < 0) || (d1 > 0 && d2 > 0 && d3 > 0);
   }
 }
