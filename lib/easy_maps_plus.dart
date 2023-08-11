@@ -3,6 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'utils.dart';
 
+export 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class EasyMap extends StatefulWidget {
   final List<LatLng> coordinates;
   final Function(GoogleMapController) onMapCreated;

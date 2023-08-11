@@ -8,7 +8,7 @@ To use EasyMapPlus, add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  easy_map_plus: 0.1.5
+  easy_map_plus: 0.1.6
 ```
 
 Then, run `flutter pub get` to fetch the package.

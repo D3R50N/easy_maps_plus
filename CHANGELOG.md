@@ -23,3 +23,7 @@
 # 0.1.5
 
 * Added some static methods to EasyMap class
+
+# 0.1.6
+
+* Export google maps
