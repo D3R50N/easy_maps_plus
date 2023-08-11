@@ -23,6 +23,7 @@ class EasyMap extends StatefulWidget {
 
   final double originIcon;
   final double destinationIcon;
+  final Set<Marker> markers;
 
   const EasyMap({
     super.key,
@@ -35,6 +36,7 @@ class EasyMap extends StatefulWidget {
     this.originIcon = BitmapDescriptor.hueGreen,
     this.destinationIcon = BitmapDescriptor.hueRed,
     this.cameraTargetBounds,
+    this.markers = const {},
   });
 
   static Future<List<ForwardGeo>> findPlaces(String query) async {
@@ -67,6 +69,20 @@ class EasyMapState extends State<EasyMap> {
   void initState() {
     super.initState();
     _getDrivingDirections();
+    if (widget.markers.isEmpty) {
+      widget.markers.addAll({
+        Marker(
+          markerId: const MarkerId('origine'),
+          position: widget.coordinates.first,
+          icon: BitmapDescriptor.defaultMarkerWithHue(widget.originIcon),
+        ),
+        Marker(
+          markerId: const MarkerId('destination'),
+          position: widget.coordinates.last,
+          icon: BitmapDescriptor.defaultMarkerWithHue(widget.destinationIcon),
+        ),
+      });
+    }
   }
 
   Future<void> _getDrivingDirections() async {
@@ -141,21 +157,7 @@ class EasyMapState extends State<EasyMap> {
           points: polylineCoordinates,
         ),
       },
-      markers: widget.showMarkers
-          ? {
-              Marker(
-                markerId: const MarkerId('origine'),
-                position: widget.coordinates.first,
-                icon: BitmapDescriptor.defaultMarkerWithHue(widget.originIcon),
-              ),
-              Marker(
-                markerId: const MarkerId('destination'),
-                position: widget.coordinates.last,
-                icon: BitmapDescriptor.defaultMarkerWithHue(
-                    widget.destinationIcon),
-              ),
-            }
-          : {},
+      markers: widget.showMarkers ? widget.markers : {},
       initialCameraPosition: widget.initialCameraPosition ??
           CameraPosition(target: widget.coordinates.first, zoom: 15),
       cameraTargetBounds: widget.cameraTargetBounds ??
